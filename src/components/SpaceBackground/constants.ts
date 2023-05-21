@@ -498,7 +498,7 @@ export const PARTICLES_PARAMS = {
       }
     },
     "wobble": {
-      "distance": 2,
+      "distance": 6,
       "enable": true,
       "speed": {
         "angle": 0,
