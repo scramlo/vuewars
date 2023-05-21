@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    /* I want all of tailwind to base off a larger font size
+    I don't use pixels because it will negate user browser preferences */
+    font-size: 120%;
+}
+
+::placeholder {
+   text-align: center; 
+}
