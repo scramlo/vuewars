@@ -7,12 +7,13 @@ defineProps<{
 
 </script>
 <template>
-    <div class="transition-all duration-500 hover:scale-105">
-        <router-link class="rounded" :to="{ name: 'category', params: { category: category.toLowerCase() } }">
-            <img class="rounded shadow-black shadow-lg mb-2 w-full h-auto saturate-50 hover:saturate-150 transition-all duration-500 ease-in-out"
+    <div>
+        <router-link class="rounded block relative w-full h-56 overflow-hidden"
+            :to="{ name: 'category', params: { category: category.toLowerCase() } }">
+            <img class="absolute hover:scale-105 rounded mb-2 w-full h-auto saturate-50 hover:saturate-100 transition-all duration-200 ease-in-out"
                 :src="cloudinaryUrl" />
-            <p class="-mb-2">{{ category }}</p>
-            <small>{{ description }}</small>
         </router-link>
+        <h2 class="-mb-1 font-bold uppercase text-sm">{{ category }}</h2>
+        <small>{{ description }}</small>
     </div>
 </template>
