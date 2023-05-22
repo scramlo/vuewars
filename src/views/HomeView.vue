@@ -1,5 +1,39 @@
 <script setup lang="ts">
 import Header from "@/components/Header.vue";
+import CategoryLink from "@/components/CategoryLink.vue";
+const cloudinaryThumbnailParams = "c_fill,dpr_auto,f_auto,g_center,h_225,q_auto,w_400";
+const categories = [
+  {
+    category: "Characters",
+    description: "Characters from the Star Wars universe",
+    cloudinaryUrl: `https://res.cloudinary.com/dxfsfczia/image/upload/${cloudinaryThumbnailParams}/v1684635322/vue%20wars/the_mandalorian-9-1_zujdgn.jpg`,
+  },
+  {
+    category: "Films",
+    description: "Films from the Star Wars universe",
+    cloudinaryUrl: `https://res.cloudinary.com/dxfsfczia/image/upload/${cloudinaryThumbnailParams}/v1684698990/vue%20wars/IMG_2172-2_vfhyir.jpg`
+  },
+  {
+    category: "Starships",
+    description: "Starships from the Star Wars universe",
+    cloudinaryUrl: `https://res.cloudinary.com/dxfsfczia/image/upload/${cloudinaryThumbnailParams}/v1684699205/vue%20wars/394178_x8k3mk.jpg`,
+  },
+  {
+    category: "Vehicles",
+    description: "Vehicles from the Star Wars universe",
+    cloudinaryUrl: `https://res.cloudinary.com/dxfsfczia/image/upload/${cloudinaryThumbnailParams}/v1684699379/vue%20wars/maxresdefault_modhqf.jpg`,
+  },
+  {
+    category: "Species",
+    description: "Species from the Star Wars universe",
+    cloudinaryUrl: `https://res.cloudinary.com/dxfsfczia/image/upload/${cloudinaryThumbnailParams}/v1684699561/vue%20wars/wp3051824_lbq4kh.jpg`,
+  },
+  {
+    category: "Planets",
+    description: "Planets from the Star Wars universe",
+    cloudinaryUrl: `https://res.cloudinary.com/dxfsfczia/image/upload/${cloudinaryThumbnailParams}/v1684699674/vue%20wars/latest_urpuoe.png`,
+  }
+]
 </script>
 <template>
   <Header class="h-screen">
@@ -18,16 +52,8 @@ import Header from "@/components/Header.vue";
       </div>
     </div>
   </Header>
-  <main id="main" class="my-10 mx-20 grid grid-cols-3">
-    <div class="transition-all duration-500 hover:scale-105">
-      <router-link class="rounded" :to="{ name: 'category', params: { category: 'characters' } }">
-        <img
-          class="rounded shadow-black shadow-lg mb-2 w-full h-auto saturate-50 hover:saturate-150 transition-all duration-500 ease-in-out"
-          src="https://res.cloudinary.com/dxfsfczia/image/upload/c_fill,dpr_auto,f_auto,g_center,h_225,q_auto,w_400/v1684635322/vue%20wars/the_mandalorian-9-1_zujdgn.jpg"
-          alt="">
-        <p class="-mb-2">Characters</p>
-        <small>Learn more about the amazing characters of Star Wars.</small>
-      </router-link>
-    </div>
+  <main id="main" class="my-5 mx-10 lg:my-10 lg:mx-20 grid lg:grid-cols-3 gap-10">
+    <CategoryLink v-for="cat in categories" :category="cat.category" :description="cat.description"
+      :cloudinary-url="cat.cloudinaryUrl" :key="cat.category" />
   </main>
 </template>
