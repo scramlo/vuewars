@@ -1,23 +1,23 @@
-import { ref, reactive, toRefs, type Ref, computed } from "vue";
+import { ref, computed } from "vue";
 
-// takes a ref array and returns an object with arrays separated by first letter
-export default function useArraysByLetter(arrayToSeparate: Ref<any[]>) {
-    // create function that does the magic
-    const separateArraysByFirstLetter = (arr: any[]) => {
-        const separateArrays: any = {};
+export default function useArraysByLetter(arrayToSeparate) {
+    const separateArraysByFirstLetter = (arr) => {
+        const separateArrays = [];
 
         for (const obj of arr) {
-            // we will always have a name property
             const { name } = obj;
             const firstLetter = name.charAt(0).toUpperCase();
 
-            // if the letter doesn't exist in the object, create it
-            if (!separateArrays[firstLetter]) {
-                separateArrays[firstLetter] = [];
-            }
+            // Find the index of the letter group in separateArrays
+            const groupIndex = separateArrays.findIndex(group => group[0].name[0] === firstLetter);
 
-            // push the object to the array
-            separateArrays[firstLetter].push(obj);
+            if (groupIndex === -1) {
+                // If the letter group doesn't exist, create it
+                separateArrays.push([obj]);
+            } else {
+                // If the letter group already exists, push the object to it
+                separateArrays[groupIndex].push(obj);
+            }
         }
 
         return separateArrays;
@@ -28,6 +28,6 @@ export default function useArraysByLetter(arrayToSeparate: Ref<any[]>) {
     });
 
     return {
-        arraysByLetter,
+        arraysByLetter
     };
 }
