@@ -9,12 +9,13 @@ import TransitionFadeDown from '@/components/ui/TransitionFadeDown.vue';
 
 const route = useRoute()
 const { characters } = useGetCharacters();
+console.log('characters', characters);
 const { arraysByLetter } = useArraysByLetter(characters);
 
 const searchQuery = ref('');
 </script>
 <template>
-    <Header class="h-72">
+    <Header class="h-56">
         <h1
             class="capitalize text-center text-5xl md:text-8xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-500 via-sky-500 to-purple-500">
             {{ route.params.category }}</h1>

@@ -1,16 +1,8 @@
-import { useQuery } from '@vue/apollo-composable';
-import gql from 'graphql-tag';
+import { getCharacters } from "@/composables/actions";
 import { computed, ref } from 'vue';
 
 export default function useGetCharacters() {
-    const { result } = useQuery(gql`
-    query getAllPeople {
-        allPeople {
-            people {
-            name
-            }
-        }
-    }`);
+    const result = ref(getCharacters());
     const characters = computed(() => {
         if (!result.value) return [];
 

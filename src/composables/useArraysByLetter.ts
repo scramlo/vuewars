@@ -1,15 +1,21 @@
-import { ref, computed } from "vue";
+import { computed, type Ref } from "vue";
+import type { Person, Planet, Species, Starship, Vehicle, Film } from "@/types/graphql";
 
-export default function useArraysByLetter(arrayToSeparate) {
-    const separateArraysByFirstLetter = (arr) => {
+type ArrayToSeparate = Person[] | Planet[] | Species[] | Starship[] | Vehicle[] | Film[];
+
+export default function useArraysByLetter(arrayToSeparate: Ref<ArrayToSeparate>) {
+    const separateArraysByFirstLetter = (arr: ArrayToSeparate) => {
         const separateArrays = [];
 
         for (const obj of arr) {
-            const { name } = obj;
-            const firstLetter = name.charAt(0).toUpperCase();
+            //unfortunately, Film does not have a name property, but instead uses title
+            let nameKey = 'name' in obj ? 'name' : 'title';
+            // @ts-ignore --> this is safe because we know there is either a name or title property
+            const firstLetter = obj[nameKey].charAt(0).toUpperCase();
 
             // Find the index of the letter group in separateArrays
-            const groupIndex = separateArrays.findIndex(group => group[0].name[0] === firstLetter);
+            // @ts-ignore --> this is safe because we know there is either a name or title property
+            const groupIndex = separateArrays.findIndex(group => group[0][nameKey][0] === firstLetter);
 
             if (groupIndex === -1) {
                 // If the letter group doesn't exist, create it

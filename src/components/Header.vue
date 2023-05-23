@@ -5,7 +5,7 @@ import { useRoute } from "vue-router";
 const routeName = useRoute().name;
 </script>
 <template>
-    <header class="relative h-screen shadow-gray-900 shadow-md">
+    <header class="relative shadow-gray-900 shadow-md">
         <router-link v-if="routeName !== 'home'" :to="{ name: 'home' }" class="absolute text-white top-5 left-5 z-10">
             <UIIconArrowLeft />
         </router-link>
