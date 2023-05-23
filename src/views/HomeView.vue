@@ -2,36 +2,37 @@
 import Header from "@/components/Header.vue";
 import CategoryLink from "@/components/CategoryLink.vue";
 import MainSpacer from "@/components/MainSpacer.vue";
+import { CategoryKey } from "@/constants";
 
 const cloudinaryThumbnailParams = "c_fill,dpr_auto,f_auto,g_center,h_225,q_auto,w_400";
 const categories = [
   {
-    category: "Characters",
+    category: CategoryKey.Person,
     description: "Characters from the Star Wars universe",
     cloudinaryUrl: `https://res.cloudinary.com/dxfsfczia/image/upload/${cloudinaryThumbnailParams}/v1684635322/vue%20wars/the_mandalorian-9-1_zujdgn.jpg`,
   },
   {
-    category: "Films",
+    category: CategoryKey.Film,
     description: "Films from the Star Wars universe",
     cloudinaryUrl: `https://res.cloudinary.com/dxfsfczia/image/upload/${cloudinaryThumbnailParams}/v1684698990/vue%20wars/IMG_2172-2_vfhyir.jpg`
   },
   {
-    category: "Starships",
+    category: CategoryKey.Starship,
     description: "Starships from the Star Wars universe",
     cloudinaryUrl: `https://res.cloudinary.com/dxfsfczia/image/upload/${cloudinaryThumbnailParams}/v1684699205/vue%20wars/394178_x8k3mk.jpg`,
   },
   {
-    category: "Vehicles",
+    category: CategoryKey.Vehicle,
     description: "Vehicles from the Star Wars universe",
     cloudinaryUrl: `https://res.cloudinary.com/dxfsfczia/image/upload/${cloudinaryThumbnailParams}/v1684699379/vue%20wars/maxresdefault_modhqf.jpg`,
   },
   {
-    category: "Species",
+    category: CategoryKey.Species,
     description: "Species from the Star Wars universe",
     cloudinaryUrl: `https://res.cloudinary.com/dxfsfczia/image/upload/${cloudinaryThumbnailParams}/v1684699561/vue%20wars/wp3051824_lbq4kh.jpg`,
   },
   {
-    category: "Planets",
+    category: CategoryKey.Planet,
     description: "Planets from the Star Wars universe",
     cloudinaryUrl: `https://res.cloudinary.com/dxfsfczia/image/upload/${cloudinaryThumbnailParams}/v1684699674/vue%20wars/latest_urpuoe.png`,
   }
