@@ -1,9 +1,10 @@
 import { getCharacters, getVehicles, getFilms, getSpecies, getPlanets, getStarships } from "@/composables/actions";
 import { CategoryKey, CategoryQueryAllKey, CategoryAccessorKey } from "@/constants";
-import { computed, ref } from 'vue';
+import type { Film } from "@/types";
+import { computed, ref, type Ref } from 'vue';
 
 export default function useGetItems(item: CategoryKey) {
-    let result;
+    let result: Ref<any> | undefined;
     switch (item) {
         case CategoryKey.Person:
             result = getCharacters();
@@ -39,7 +40,7 @@ export default function useGetItems(item: CategoryKey) {
         // now, if it is films, we need to change the "title" key to "name"
         if (item === CategoryKey.Film) {
             const films = result.value[queryKey].films || [];
-            const filmsWithName = films.map((film) => {
+            const filmsWithName = films.map((film: Film) => {
                 return {
                     ...film,
                     name: film.title,

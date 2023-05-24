@@ -10,7 +10,8 @@ import type { CategoryArray, Category } from "@/types";
 import { CategoryAccessorKey, CategoryFriendly, CategoryKey } from "@/constants";
 
 const route = useRoute();
-const { items } = useGetItems(route.params.category);
+const category = route.params.category as CategoryKey;
+const { items } = useGetItems(category);
 const { arraysByLetter } = useArraysByLetter(items);
 
 function shouldShowLetter(itemLetterGroup: CategoryArray) {
@@ -45,7 +46,7 @@ const searchQuery = ref('');
     <Header class="h-56">
         <h1
             class="capitalize text-center text-5xl md:text-8xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-500 via-sky-500 to-purple-500">
-            {{ CategoryFriendly[route.params.category] }}</h1>
+            {{ CategoryFriendly[category] }}</h1>
     </Header>
     <MainSpacer>
         <input v-model="searchQuery" class="rounded p-2 border-2 border-black w-full mb-4" type="text" placeholder="Search">
