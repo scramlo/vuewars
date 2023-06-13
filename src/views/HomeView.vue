@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Header from "@/components/Header.vue";
 import CategoryLink from "@/components/CategoryLink.vue";
-import MainSpacer from "@/components/MainSpacer.vue";
+import Spacer from "@/components/Spacer.vue";
 import { CategoryKey } from "@/constants";
 
 const cloudinaryThumbnailParams = "c_fill,dpr_auto,f_auto,g_center,h_225,q_auto,w_400";
@@ -55,10 +55,10 @@ const categories = [
       </div>
     </div>
   </Header>
-  <MainSpacer id="main">
+  <Spacer id="main">
     <div class="grid lg:grid-cols-3 gap-10">
       <CategoryLink v-for="cat in categories" :category="cat.category" :description="cat.description"
         :cloudinary-url="cat.cloudinaryUrl" :key="cat.category" />
     </div>
-  </MainSpacer>
+  </Spacer>
 </template>

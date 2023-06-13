@@ -2,12 +2,12 @@
 import { useRoute } from 'vue-router'
 import Header from "@/components/Header.vue";
 import useGetItems from "@/composables/useGetItems";
-import MainSpacer from '@/components/MainSpacer.vue';
+import Spacer from '@/components/Spacer.vue';
 import useArraysByLetter from '@/composables/useArraysByLetter';
 import { ref } from 'vue';
 import TransitionFadeDown from '@/components/ui/TransitionFadeDown.vue';
 import type { CategoryArray, Category } from "@/types";
-import { CategoryAccessorKey, CategoryFriendly, CategoryKey } from "@/constants";
+import { CategoryFriendly, CategoryKey } from "@/constants";
 
 const route = useRoute();
 const category = route.params.category as CategoryKey;
@@ -48,8 +48,9 @@ const searchQuery = ref('');
             class="capitalize text-center text-5xl md:text-8xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-500 via-sky-500 to-purple-500">
             {{ CategoryFriendly[category] }}</h1>
     </Header>
-    <MainSpacer>
-        <input v-model="searchQuery" class="rounded p-2 border-2 border-black w-full mb-4" type="text" placeholder="Search">
+    <Spacer>
+        <input v-model="searchQuery" class="rounded p-2 border-2 border-black w-full mb-4 text-center font-extrabold"
+            type="text" placeholder="search">
         <ul>
             <li v-for="itemLetterGroup in arraysByLetter">
                 <TransitionFadeDown>
@@ -57,12 +58,12 @@ const searchQuery = ref('');
                         returnFirstLetter(itemLetterGroup[0]) }}</h2>
                 </TransitionFadeDown>
 
-                <ul>
+                <ul class="md:flex md:flex-wrap">
 
                     <li v-for="item in itemLetterGroup" :key="item.id">
                         <TransitionFadeDown>
                             <button v-if="shouldShowItem(item)"
-                                class="w-full transition-all duration-200 text-white bg-black p-2 rounded mb-4 hover:scale-105 hover:cursor-pointer">
+                                class="mt-4 mr-4 mb-4 h-36 w-full md:w-48 transition-all duration-200 text-white bg-black p-2 rounded hover:scale-105 hover:cursor-pointer">
                                 {{ item.name }}
                             </button>
                         </TransitionFadeDown>
@@ -71,5 +72,5 @@ const searchQuery = ref('');
                 </ul>
             </li>
         </ul>
-    </MainSpacer>
+    </Spacer>
 </template>
