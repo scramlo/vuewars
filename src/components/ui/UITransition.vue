@@ -14,7 +14,7 @@ const props = withDefaults(defineProps<Props>(), {
     transitionType: TransitionType.Fade,
     transitionDistance: TransitionDistance.Medium,
     transitionDelay: '0s',
-    transitionDuration: '0s',
+    transitionDuration: '0.5s',
     appear: false,
 })
 
@@ -35,7 +35,6 @@ const transitionTransformArgument = computed(() => {
 
 // needed to use in css
 const transitionTransformArgumentValue = transitionTransformArgument.value;
-
 </script>
 <template>
     <transition :appear="appear" :name="transitionType">

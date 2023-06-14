@@ -2,13 +2,17 @@
 import { useRoute } from 'vue-router'
 import Header from "@/components/Header.vue";
 import useGetItems from "@/composables/useGetItems";
-import Spacer from '@/components/Spacer.vue';
+import Page from '@/components/Page.vue';
 import useArraysByLetter from '@/composables/useArraysByLetter';
 import { ref } from 'vue';
 import UITransition from '@/components/ui/UITransition.vue';
-import { TransitionType } from '@/constants';
 import type { CategoryArray, Category } from "@/types";
 import { CategoryFriendly, CategoryKey } from "@/constants";
+import UIModal from '@/components/ui/UIModal.vue';
+import { useModalStore } from '@/stores/modal';
+
+const store = useModalStore();
+const { toggleModal } = store;
 
 const route = useRoute();
 const category = route.params.category as CategoryKey;
@@ -42,28 +46,32 @@ function returnFirstLetter(item: Category) {
 }
 
 const searchQuery = ref('');
+
+function calculateDelay(index: number) {
+    return `${index * 0.1}s`
+}
 </script>
 <template>
-    <Header class="h-56">
-        <h1
-            class="capitalize text-center text-5xl md:text-8xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-500 via-sky-500 to-purple-500">
-            {{ CategoryFriendly[category] }}</h1>
-    </Header>
-    <Spacer>
+    <Page headerClasses="h-56">
+        <template #header>
+            <h1
+                class="capitalize text-center text-5xl md:text-8xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-500 via-sky-500 to-purple-500">
+                {{ CategoryFriendly[category] }}</h1>
+        </template>
         <input v-model="searchQuery" class="rounded p-2 border-2 border-black w-full mb-4 text-center font-extrabold"
             type="text" placeholder="search">
         <ul>
             <li v-for="itemLetterGroup in arraysByLetter">
-                <UITransition>
+                <UITransition :appear="true">
                     <h2 v-if="shouldShowLetter(itemLetterGroup)" class="font-extrabold text-xl">{{
                         returnFirstLetter(itemLetterGroup[0]) }}</h2>
                 </UITransition>
 
                 <ul class="md:flex md:flex-wrap">
 
-                    <li v-for="item in itemLetterGroup" :key="item.id">
-                        <UITransition>
-                            <button v-if="shouldShowItem(item)"
+                    <li v-for="(item, index) in itemLetterGroup" :key="item.id">
+                        <UITransition :appear="true" :transitionDelay="calculateDelay(index)">
+                            <button v-if="shouldShowItem(item)" @click="toggleModal"
                                 class="mt-4 mr-4 mb-4 h-36 w-full md:w-48 transition-all duration-200 text-white bg-black p-2 rounded hover:scale-105 hover:cursor-pointer">
                                 {{ item.name }}
                             </button>
@@ -73,5 +81,10 @@ const searchQuery = ref('');
                 </ul>
             </li>
         </ul>
-    </Spacer>
+    </Page>
+    <UIModal>
+        <template #title>
+
+        </template>
+    </UIModal>
 </template>
