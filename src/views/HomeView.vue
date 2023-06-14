@@ -2,7 +2,8 @@
 import Header from "@/components/Header.vue";
 import CategoryLink from "@/components/CategoryLink.vue";
 import Spacer from "@/components/Spacer.vue";
-import { CategoryKey } from "@/constants";
+import { CategoryKey, TransitionDelay, TransitionDuration } from "@/constants";
+import UITransition from "@/components/ui/UITransition.vue";
 
 const cloudinaryThumbnailParams = "c_fill,dpr_auto,f_auto,g_center,h_225,q_auto,w_400";
 const categories = [
@@ -40,19 +41,26 @@ const categories = [
 </script>
 <template>
   <Header class="h-screen">
+
     <div class="flex flex-col gap-6 md:gap-10">
       <div>
-        <h1
-          class="text-center text-6xl md:text-8xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-500 via-sky-500 to-purple-500">
-          Vue Wars</h1>
-        <p class="text-white text-center">A beautiful encyclopedia of your favorite <span class="text-sky-500">galaxy
-            far, far
-            away...</span></p>
+        <UITransition :appear="true" transition-duration="2s" transition-delay="0.5s">
+          <h1
+            class="text-center text-6xl md:text-8xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-500 via-sky-500 to-purple-500">
+            Vue Wars</h1>
+        </UITransition>
+        <UITransition :appear="true" transition-duration="2s" transition-delay="1s">
+          <p class="text-white text-center">A beautiful encyclopedia of your favorite <span class="text-sky-500">galaxy
+              far, far
+              away...</span></p>
+        </UITransition>
       </div>
-      <!-- <input class="rounded p-2 m-4 md:m-0" type="text" placeholder="Search"> -->
-      <div class="flex justify-center">
-        <a href="#main" class="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">Explore</a>
-      </div>
+      <UITransition :appear="true" transition-duration="2s" transition-delay="1.5s">
+        <div class="flex justify-center">
+          <a href="#main"
+            class="bg-purple-500 hover:bg-purple-700 transition-property:colors duration-300 ease-in-out text-white font-bold py-2 px-4 rounded">Explore</a>
+        </div>
+      </UITransition>
     </div>
   </Header>
   <Spacer id="main">

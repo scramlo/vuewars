@@ -25,7 +25,6 @@ export default function useArraysByLetter(arrayToSeparate: Ref<CategoryArray>) {
                 separateArrays[groupIndex].push(obj);
             }
         }
-        console.log('separateArrays', separateArrays);
         return separateArrays;
     };
 

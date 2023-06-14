@@ -33,3 +33,31 @@ export enum CategoryAccessorKey {
     Vehicle = 'vehicles',
     Film = 'films',
 }
+
+export enum TransitionType {
+    Fade = 'fade',
+    FadeDown = 'fade-down',
+    FadeUp = 'fade-up',
+    FadeRight = 'fade-right',
+    FadeLeft = 'fade-left',
+}
+
+export enum TransitionDistance {
+    Short = '1rem',
+    Medium = '5rem',
+    Long = '10rem',
+}
+
+export enum TransitionDuration {
+    None = '0s',
+    Short = '0.5s',
+    Medium = '1s',
+    Long = '2s',
+}
+
+export enum TransitionDelay {
+    None = '0s',
+    Short = '0.5s',
+    Medium = '1s',
+    Long = '2s',
+}

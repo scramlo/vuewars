@@ -5,7 +5,8 @@ import useGetItems from "@/composables/useGetItems";
 import Spacer from '@/components/Spacer.vue';
 import useArraysByLetter from '@/composables/useArraysByLetter';
 import { ref } from 'vue';
-import TransitionFadeDown from '@/components/ui/TransitionFadeDown.vue';
+import UITransition from '@/components/ui/UITransition.vue';
+import { TransitionType } from '@/constants';
 import type { CategoryArray, Category } from "@/types";
 import { CategoryFriendly, CategoryKey } from "@/constants";
 
@@ -53,20 +54,20 @@ const searchQuery = ref('');
             type="text" placeholder="search">
         <ul>
             <li v-for="itemLetterGroup in arraysByLetter">
-                <TransitionFadeDown>
+                <UITransition>
                     <h2 v-if="shouldShowLetter(itemLetterGroup)" class="font-extrabold text-xl">{{
                         returnFirstLetter(itemLetterGroup[0]) }}</h2>
-                </TransitionFadeDown>
+                </UITransition>
 
                 <ul class="md:flex md:flex-wrap">
 
                     <li v-for="item in itemLetterGroup" :key="item.id">
-                        <TransitionFadeDown>
+                        <UITransition>
                             <button v-if="shouldShowItem(item)"
                                 class="mt-4 mr-4 mb-4 h-36 w-full md:w-48 transition-all duration-200 text-white bg-black p-2 rounded hover:scale-105 hover:cursor-pointer">
                                 {{ item.name }}
                             </button>
-                        </TransitionFadeDown>
+                        </UITransition>
                     </li>
 
                 </ul>
