@@ -16,7 +16,7 @@ const { open } = storeToRefs(store);
             transitionDuration="0.5s">
 
             <aside v-if="open"
-                class="fixed z-10 pb-4 shadow-xl mx-10 lg:mx-20 top-48 h-full w-5/6 bg-white rounded-xl overflow-scroll">
+                class="fixed z-10 pb-4 shadow-xl mx-10 lg:mx-20 top-24 h-full w-5/6 bg-white rounded-xl overflow-scroll">
                 <div
                     class="flex justify-between sticky top-0 z-20 py-2 px-4 rounded-t-xl bg-gradient-to-r from-green-500 via-sky-500 to-purple-500">
                     <span>

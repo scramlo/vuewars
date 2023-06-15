@@ -1,5 +1,9 @@
+import type { Person } from "@/types";
 import { gql } from "@apollo/client/core";
 import { useQuery } from "@vue/apollo-composable";
+import { provideApolloClient } from "@vue/apollo-composable";
+import { apolloClient } from "@/main";
+
 
 export function getCharacters() {
     const { result } = useQuery(gql`
@@ -7,6 +11,7 @@ export function getCharacters() {
         allPeople {
             people {
               name
+              id
             }
         }
     }`);
@@ -19,6 +24,7 @@ export function getVehicles() {
         allVehicles {
             vehicles {
                name
+               id
             }
         }
     }`);
@@ -31,6 +37,7 @@ export function getSpecies() {
         allSpecies {
             species {
                name
+               id
             }
         }
     }`);
@@ -43,6 +50,7 @@ export function getPlanets() {
         allPlanets {
             planets {
                name
+               id
             }
         }
     }`);
@@ -55,6 +63,7 @@ export function getStarships() {
         allStarships {
             starships {
                name
+               id
             }
         }
     }`);
@@ -67,8 +76,20 @@ export function getFilms() {
         allFilms {
             films {
                title
+               id
             }
         }
     }`);
+    return result;
+}
+
+export function getCharacter(id: string) {
+    const { result } = provideApolloClient(apolloClient)(() => useQuery(gql`
+    query getCharacter($id: ID!) {
+        person(id: $id) {
+            name
+        }
+    }
+  `))
     return result;
 }

@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
-import Header from "@/components/Header.vue";
 import useGetItems from "@/composables/useGetItems";
 import Page from '@/components/Page.vue';
 import useArraysByLetter from '@/composables/useArraysByLetter';
@@ -10,6 +9,7 @@ import type { CategoryArray, Category } from "@/types";
 import { CategoryFriendly, CategoryKey } from "@/constants";
 import UIModal from '@/components/ui/UIModal.vue';
 import { useModalStore } from '@/stores/modal';
+import useGetItem from '@/composables/useGetItem';
 
 const store = useModalStore();
 const { toggleModal } = store;
@@ -50,6 +50,14 @@ const searchQuery = ref('');
 function calculateDelay(index: number) {
     return `${index * 0.1}s`
 }
+
+const item = ref({});
+
+function showItemDetails(item: Category) {
+    // toggleModal();
+    const { result } = useGetItem();
+    console.log(result);
+}
 </script>
 <template>
     <Page headerClasses="h-56">
@@ -71,7 +79,7 @@ function calculateDelay(index: number) {
 
                     <li v-for="(item, index) in itemLetterGroup" :key="item.id">
                         <UITransition :appear="true" :transitionDelay="calculateDelay(index)">
-                            <button v-if="shouldShowItem(item)" @click="toggleModal"
+                            <button v-if="shouldShowItem(item)" @click="showItemDetails(item)"
                                 class="mt-4 mr-4 mb-4 h-36 w-full md:w-48 transition-all duration-200 text-white bg-black p-2 rounded hover:scale-105 hover:cursor-pointer">
                                 {{ item.name }}
                             </button>

@@ -3,9 +3,9 @@ import { CategoryKey, CategoryQueryAllKey, CategoryAccessorKey } from "@/constan
 import type { Film } from "@/types";
 import { computed, ref, type Ref } from 'vue';
 
-export default function useGetItems(item: CategoryKey) {
+export default function useGetItems(category: CategoryKey) {
     let result: Ref<any> | undefined;
-    switch (item) {
+    switch (category) {
         case CategoryKey.Person:
             result = getCharacters();
             break;
@@ -30,15 +30,15 @@ export default function useGetItems(item: CategoryKey) {
 
 
     const items = computed(() => {
-        const queryKey = CategoryQueryAllKey[item];
-        const dtoAccessor = CategoryAccessorKey[item];
+        const queryKey = CategoryQueryAllKey[category];
+        const dtoAccessor = CategoryAccessorKey[category];
         // useQuery returns a ref, so don't do anything until we actually get the info back
         if (!result?.value) {
             return [];
         }
 
         // now, if it is films, we need to change the "title" key to "name"
-        if (item === CategoryKey.Film) {
+        if (category === CategoryKey.Film) {
             const films = result.value[queryKey].films || [];
             const filmsWithName = films.map((film: Film) => {
                 return {
