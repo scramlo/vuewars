@@ -61,7 +61,6 @@ function showItemDetails(category: Category) {
 
 const singleItemComponent = computed(() => {
     if (category === CategoryKey.Person) {
-        console.log(singleItem?.value);
         return () => h(SinglePerson as Component, { person: singleItem?.value });
     }
     return () => h('div', 'No component found');

@@ -91,6 +91,14 @@ export function getCharacter(id: string) {
             name
             birthYear
             eyeColor
+            gender
+            hairColor
+            height
+            mass
+            skinColor
+            homeworld {
+                name
+            }
         }
     }
   `, {

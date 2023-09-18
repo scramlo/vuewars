@@ -1,6 +1,5 @@
 import { CategoryKey } from "@/constants";
 import { getCharacter, getPlanet } from "@/composables/actions";
-import type { Ref } from "vue";
 import type { Category } from "@/types";
 
 export default function useGetItem(category: Category) {
