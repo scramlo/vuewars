@@ -89,12 +89,14 @@ export function getCharacter(id: string) {
     query getCharacter($id: ID!) {
         person(id: $id) {
             name
+            birthYear
+            eyeColor
         }
     }
   `, {
         id
     }))
-    const result = computed(() => query.result.value?.person ?? '')
+    const result = computed(() => query.result.value?.person)
     return result;
 }
 
@@ -108,6 +110,6 @@ export function getPlanet(id: string) {
   `, {
         id
     }))
-    const result = computed(() => query.result.value?.planet ?? '')
+    const result = computed(() => query.result.value?.planet)
     return result;
 }

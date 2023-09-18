@@ -3,13 +3,14 @@ import { useRoute } from 'vue-router'
 import useGetItems from "@/composables/useGetItems";
 import Page from '@/components/Page.vue';
 import useArraysByLetter from '@/composables/useArraysByLetter';
-import { ref, watchEffect, type Ref, type ComputedRef } from 'vue';
+import { ref, watchEffect, type Ref, type ComputedRef, computed, h, type Component } from 'vue';
 import UITransition from '@/components/ui/UITransition.vue';
 import type { CategoryArray, Category } from "@/types";
 import { CategoryFriendly, CategoryKey } from "@/constants";
 import UIModal from '@/components/ui/UIModal.vue';
 import { useModalStore } from '@/stores/modal';
 import useGetItem from '@/composables/useGetItem';
+import SinglePerson from '@/components/SinglePerson.vue';
 
 const store = useModalStore();
 const { toggleModal } = store;
@@ -58,8 +59,12 @@ function showItemDetails(category: Category) {
     toggleModal();
 }
 
-watchEffect( () => {
-    console.log('singleItem', singleItem?.value);
+const singleItemComponent = computed(() => {
+    if (category === CategoryKey.Person) {
+        console.log(singleItem?.value);
+        return () => h(SinglePerson as Component, { person: singleItem?.value });
+    }
+    return () => h('div', 'No component found');
 });
 </script>
 <template>
@@ -95,7 +100,8 @@ watchEffect( () => {
     </Page>
     <UIModal>
         <template #title>
-            <h1 class="text-2xl font-extrabold">{{ singleItem?.name ?? ' ' }}</h1>
+            <h1 class="text-2xl font-extrabold">{{ singleItem?.name ?? 'Loading' }}</h1>
         </template>
+        <component :is="singleItemComponent"/>
     </UIModal>
 </template>

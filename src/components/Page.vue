@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import Header from './Header.vue';
 
-const props = defineProps<{
+defineProps<{
     headerClasses?: string,
     headerId?: string,
     contentClasses?: string,
