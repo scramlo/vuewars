@@ -3,6 +3,7 @@ import { gql } from "@apollo/client/core";
 import { useQuery } from "@vue/apollo-composable";
 import { provideApolloClient } from "@vue/apollo-composable";
 import { apolloClient } from "@/main";
+import { computed } from "vue";
 
 
 export function getCharacters() {
@@ -84,12 +85,29 @@ export function getFilms() {
 }
 
 export function getCharacter(id: string) {
-    const { result } = provideApolloClient(apolloClient)(() => useQuery(gql`
+    const query = provideApolloClient(apolloClient)(() => useQuery(gql`
     query getCharacter($id: ID!) {
         person(id: $id) {
             name
         }
     }
-  `))
+  `, {
+        id
+    }))
+    const result = computed(() => query.result.value?.person ?? '')
+    return result;
+}
+
+export function getPlanet(id: string) {
+    const query = provideApolloClient(apolloClient)(() => useQuery(gql`
+    query getPlanet($id: ID!) {
+        person(id: $id) {
+            name
+        }
+    }
+  `, {
+        id
+    }))
+    const result = computed(() => query.result.value?.planet ?? '')
     return result;
 }

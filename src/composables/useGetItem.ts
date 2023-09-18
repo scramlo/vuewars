@@ -1,9 +1,12 @@
 import { CategoryKey } from "@/constants";
-import { getCharacter } from "@/composables/actions";
+import { getCharacter, getPlanet } from "@/composables/actions";
 import type { Ref } from "vue";
+import type { Category } from "@/types";
 
-export default function useGetItem(category: CategoryKey, id: string) {
-    let result: Ref<any> | undefined;
-    result = getCharacter(id);
-    return result;
+export default function useGetItem(category: Category) {
+    if (category.__typename === CategoryKey.Person) {
+        return getCharacter(category['id']);
+    } else if (category.__typename === CategoryKey.Planet) {
+        return getPlanet(category['id']);
+    }
 };

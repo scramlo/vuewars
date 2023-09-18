@@ -3,7 +3,7 @@ import { useRoute } from 'vue-router'
 import useGetItems from "@/composables/useGetItems";
 import Page from '@/components/Page.vue';
 import useArraysByLetter from '@/composables/useArraysByLetter';
-import { ref } from 'vue';
+import { ref, watchEffect, type Ref, type ComputedRef } from 'vue';
 import UITransition from '@/components/ui/UITransition.vue';
 import type { CategoryArray, Category } from "@/types";
 import { CategoryFriendly, CategoryKey } from "@/constants";
@@ -51,13 +51,16 @@ function calculateDelay(index: number) {
     return `${index * 0.1}s`
 }
 
-const item = ref({});
+let singleItem: ComputedRef<Category> | undefined;
 
-function showItemDetails(item: Category) {
-    // toggleModal();
-    const { result } = useGetItem();
-    console.log(result);
+function showItemDetails(category: Category) {
+    singleItem = useGetItem(category);
+    toggleModal();
 }
+
+watchEffect( () => {
+    console.log('singleItem', singleItem?.value);
+});
 </script>
 <template>
     <Page headerClasses="h-56">
@@ -92,7 +95,7 @@ function showItemDetails(item: Category) {
     </Page>
     <UIModal>
         <template #title>
-
+            <h1 class="text-2xl font-extrabold">{{ singleItem?.name ?? ' ' }}</h1>
         </template>
     </UIModal>
 </template>
