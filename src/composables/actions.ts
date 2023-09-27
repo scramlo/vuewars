@@ -84,7 +84,7 @@ export function getFilms() {
 }
 
 export function getCharacter(id: string) {
-    const { result } = useQuery(gql`
+    const query = provideApolloClient(apolloClient)(() => useQuery(gql`
     query getCharacter($id: ID!) {
         person(id: $id) {
             name
@@ -102,9 +102,9 @@ export function getCharacter(id: string) {
     }
   `, {
         id
-    });
-    const computedResult = computed(() => result.value?.person)
-    return computedResult;
+    }))
+    const result = computed(() => query.result.value?.person)
+    return result;
 }
 
 export function getPlanet(id: string) {
