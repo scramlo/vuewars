@@ -12,7 +12,7 @@ defineProps<{
     <Header :class="headerClasses">
         <slot name="header" />
     </Header>
-    <div :id="contentId" :class="contentClasses" class="my-5 lg:my-10 mx-10 lg:mx-20">
+    <div :id="contentId" :class="contentClasses" class="my-5 lg:my-10 mx-10 lg:mx-20 flex flex-col gap-10">
         <slot />
     </div>
 </template>

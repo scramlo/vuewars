@@ -48,10 +48,6 @@ function returnFirstLetter(item: Category) {
 
 const searchQuery = ref('');
 
-function calculateDelay(index: number) {
-    return `${index * 0.1}s`
-}
-
 let singleItem: ComputedRef<Category> | undefined;
 
 function showItemDetails(category: Category) {
@@ -69,32 +65,26 @@ const singleItemComponent = computed(() => {
 <template>
     <Page headerClasses="h-56">
         <template #header>
+            <UITransition :appear="true" transition-duration="2s" transition-delay="0.5s">
+
             <h1
                 class="capitalize text-center text-5xl md:text-8xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-500 via-sky-500 to-purple-500">
                 {{ CategoryFriendly[category] }}</h1>
+            </UITransition>
         </template>
-        <input v-model="searchQuery" class="rounded p-2 border-2 border-black w-full mb-4 text-center font-extrabold"
+        <input v-model="searchQuery" class="rounded p-2 border-2 border-black w-full text-center font-extrabold"
             type="text" placeholder="search">
-        <ul>
-            <li v-for="itemLetterGroup in arraysByLetter">
-                <UITransition :appear="true">
-                    <h2 v-if="shouldShowLetter(itemLetterGroup)" class="font-extrabold text-xl">{{
-                        returnFirstLetter(itemLetterGroup[0]) }}</h2>
-                </UITransition>
-
-                <ul class="md:flex md:flex-wrap">
-
-                    <li v-for="(item, index) in itemLetterGroup" :key="item.id">
-                        <UITransition :appear="true" :transitionDelay="calculateDelay(index)">
-                            <button v-if="shouldShowItem(item)" @click="showItemDetails(item)"
-                                class="mt-4 mr-4 mb-4 h-36 w-full md:w-48 transition-all duration-200 text-white bg-black p-2 rounded hover:scale-105 hover:cursor-pointer">
-                                {{ item.name }}
-                            </button>
-                        </UITransition>
-                    </li>
-
-                </ul>
-            </li>
+        <ul class="grid grid-cols-6 gap-4">
+            <template v-for="(item, index) in items" :key="item.id">
+            <UITransition :appear="true">
+                <li class="h-[10rem] w-100" v-if="shouldShowItem(item)">
+                    <button @click="showItemDetails(item)"
+                        class="h-full w-full transition-all duration-200 text-white bg-black p-2 rounded hover:scale-105 hover:cursor-pointer">
+                        {{ item.name }}
+                    </button>
+                </li>
+            </UITransition>
+            </template>
         </ul>
     </Page>
     <UIModal>

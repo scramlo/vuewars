@@ -16,7 +16,7 @@ const { open } = storeToRefs(store);
             transitionDuration="0.5s">
 
             <aside v-if="open"
-                class="fixed z-10 pb-4 shadow-xl top-24 h-full w-9/12 bg-white rounded-xl overflow-scroll">
+                class="fixed left-0 right-0 mx-auto max-w-[85vw] z-10 pb-4 shadow-xl top-24 lg:top-56 h-full bg-white bg-opacity-[75%] rounded-xl overflow-scroll">
                 <div
                     class="flex justify-between sticky top-0 z-20 py-2 px-4 rounded-t-xl bg-gradient-to-r from-green-500 via-sky-500 to-purple-500">
                     <span>
@@ -30,7 +30,7 @@ const { open } = storeToRefs(store);
                         </svg>
                     </button>
                 </div>
-                <div class="p-4">
+                <div class="p-4 overflow-scroll">
                     <slot />
                 </div>
 
