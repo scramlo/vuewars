@@ -12,3 +12,9 @@ html {
 ::placeholder {
     text-align: center;
 }
+
+a.link { color: #1D4ED8; text-decoration: 'underline'; }
+a.link:hover { color: #1E40AF; }
+a.link:focus { outline: '2px solid #3B82F6'; }
+a.link:visited { color: #6B21A8; }
+a.link:active { color: #2563EB; }

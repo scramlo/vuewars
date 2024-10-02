@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import useScrapeDuckDuckGo from '@/composables/useScrapeDuckDuckGo';
 import type { Person } from '@/types';
-import { ref, toRef } from 'vue';
+import UITransition from './ui/UITransition.vue';
+import { ref } from 'vue';
 
 const props = defineProps<{
     person?: Person,
 }>();
 
 const { ddgData, imageUrl } = useScrapeDuckDuckGo(() => props.person);
+
 </script>
 
 <template>
@@ -23,10 +25,12 @@ const { ddgData, imageUrl } = useScrapeDuckDuckGo(() => props.person);
                 <li class="capitalize"><span class="font-bold">Skin Color:</span> {{ person?.skinColor ?? '' }}</li>
                 <li class="capitalize"><span class="font-bold">Home World:</span> {{ person?.homeworld?.name ?? '' }}</li>
             </ul>
-            <img class="rounded" v-if="imageUrl" :src="imageUrl" alt="">
+            <UITransition transition-duration="1s">
+                <img v-if="imageUrl" class="rounded h-[325px] w-[325px] object-contain" height="325" width="325" :src="imageUrl" :alt="ddgData?.Heading">
+            </UITransition>
         </div>
         <p v-if="ddgData?.Abstract">
-            {{ ddgData.Abstract }} <a :href="ddgData.AbstractURL">Read More...</a>
+            {{ ddgData.Abstract }} <a class="link" :href="ddgData.AbstractURL" target="_blank">Read More...</a>
         </p>
     </article>
 </template>

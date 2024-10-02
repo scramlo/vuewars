@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { Vehicle } from '@/types';
 import useScrapeDuckDuckGo from '@/composables/useScrapeDuckDuckGo';
+import UITransition from './ui/UITransition.vue';
+import { computed, ref } from 'vue';
 
 const props = defineProps<{
     vehicle?: Vehicle,
@@ -26,10 +28,12 @@ const { ddgData, imageUrl } = useScrapeDuckDuckGo(() => props.vehicle);
                 <li class="capitalize"><span class="font-bold">Cargo Capacity:</span> {{ vehicle?.cargoCapacity ?? '' }}</li>
                 <li class="capitalize"><span class="font-bold">Consumables:</span> {{ vehicle?.consumables ?? '' }}</li>
             </ul>
-            <img class="rounded" v-if="imageUrl" :src="imageUrl" alt="">
+            <UITransition>
+                <img v-if="imageUrl" class="rounded h-[325px] w-[325px] object-scale-down" height="325" width="325" :src="imageUrl" :alt="ddgData?.Heading">
+            </UITransition>
         </div>
         <p v-if="ddgData?.Abstract">
-            {{ ddgData.Abstract }} <a :href="ddgData.AbstractURL">Read More...</a>
+            {{ ddgData.Abstract }} <a class="link" :href="ddgData.AbstractURL" target="_blank">Read More...</a>
         </p>
     </article>
 </template>
