@@ -1,4 +1,5 @@
 import type { Film, Maybe, Person, Planet, Scalars, Species, Starship, Vehicle } from "./graphql";
+export type { DDGData } from "./ddg";
 
 export * from "./graphql";
 

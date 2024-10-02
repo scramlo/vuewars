@@ -11,6 +11,7 @@ import UIModal from '@/components/ui/UIModal.vue';
 import { useModalStore } from '@/stores/modal';
 import useGetItem from '@/composables/useGetItem';
 import SinglePerson from '@/components/SinglePerson.vue';
+import SingleVehicle from '@/components/SingleVehicle.vue';
 
 const store = useModalStore();
 const { toggleModal } = store;
@@ -18,31 +19,12 @@ const { toggleModal } = store;
 const route = useRoute();
 const category = route.params.category as CategoryKey;
 const { items } = useGetItems(category);
-const { arraysByLetter } = useArraysByLetter(items);
-
-function shouldShowLetter(itemLetterGroup: CategoryArray) {
-    return itemLetterGroup.some((item) => {
-        if ('name' in item && item.name) {
-            return item.name.toLowerCase().includes(searchQuery.value.toLowerCase())
-        } else if ('title' in item && item.title) {
-            return item.title.toLowerCase().includes(searchQuery.value.toLowerCase())
-        }
-    })
-}
 
 function shouldShowItem(item: Category) {
     if ('name' in item && item.name) {
         return item.name.toLowerCase().includes(searchQuery.value.toLowerCase())
     } else if ('title' in item && item.title) {
         return item.title.toLowerCase().includes(searchQuery.value.toLowerCase())
-    }
-}
-
-function returnFirstLetter(item: Category) {
-    if ('name' in item) {
-        return item.name?.[0] ?? 'Unknown'
-    } else if ('title' in item) {
-        return item.title?.[0] ?? 'Unknown'
     }
 }
 
@@ -58,6 +40,8 @@ function showItemDetails(category: Category) {
 const singleItemComponent = computed(() => {
     if (category === CategoryKey.Person) {
         return () => h(SinglePerson as Component, { person: singleItem?.value });
+    } else if (category === CategoryKey.Vehicle) {
+        return () => h(SingleVehicle as Component, { vehicle: singleItem?.value });
     }
     return () => h('div', 'No component found');
 });
@@ -74,7 +58,7 @@ const singleItemComponent = computed(() => {
         </template>
         <input v-model="searchQuery" class="rounded p-2 border-2 border-black w-full text-center font-extrabold"
             type="text" placeholder="search">
-        <ul class="grid grid-cols-6 gap-4">
+        <ul class="grid md:grid-cols-4 lg:grid-cols-6 gap-4">
             <template v-for="(item, index) in items" :key="item.id">
             <UITransition :appear="true">
                 <li class="h-[10rem] w-100" v-if="shouldShowItem(item)">

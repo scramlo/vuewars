@@ -110,7 +110,7 @@ export function getCharacter(id: string) {
 export function getPlanet(id: string) {
     const query = provideApolloClient(apolloClient)(() => useQuery(gql`
     query getPlanet($id: ID!) {
-        person(id: $id) {
+        planet(id: $id) {
             name
         }
     }
@@ -118,5 +118,29 @@ export function getPlanet(id: string) {
         id
     }))
     const result = computed(() => query.result.value?.planet)
+    return result;
+}
+
+export function getVehicle(id: string) {
+    const query = provideApolloClient(apolloClient)(() => useQuery(gql`
+    query getVehicle($id: ID!) {
+        vehicle(id: $id) {
+            name
+            model
+            vehicleClass
+            manufacturers
+            costInCredits
+            length
+            crew
+            passengers
+            maxAtmospheringSpeed
+            cargoCapacity
+            consumables
+        }
+    }
+  `, {
+        id
+    }))
+    const result = computed(() => query.result.value?.vehicle)
     return result;
 }

@@ -1,5 +1,5 @@
 import { CategoryKey } from "@/constants";
-import { getCharacter, getPlanet } from "@/composables/actions";
+import { getCharacter, getPlanet, getVehicle } from "@/composables/actions";
 import type { Category } from "@/types";
 
 export default function useGetItem(category: Category) {
@@ -7,5 +7,7 @@ export default function useGetItem(category: Category) {
         return getCharacter(category['id']);
     } else if (category.__typename === CategoryKey.Planet) {
         return getPlanet(category['id']);
+    } else if (category.__typename === CategoryKey.Vehicle) {
+        return getVehicle(category['id']);
     }
 };
