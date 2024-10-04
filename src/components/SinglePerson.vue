@@ -2,7 +2,6 @@
 import useScrapeDuckDuckGo from '@/composables/useScrapeDuckDuckGo';
 import type { Person } from '@/types';
 import UITransition from './ui/UITransition.vue';
-import { ref } from 'vue';
 
 const props = defineProps<{
     person?: Person,

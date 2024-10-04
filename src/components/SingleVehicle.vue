@@ -2,7 +2,6 @@
 import type { Vehicle } from '@/types';
 import useScrapeDuckDuckGo from '@/composables/useScrapeDuckDuckGo';
 import UITransition from './ui/UITransition.vue';
-import { computed, ref } from 'vue';
 
 const props = defineProps<{
     vehicle?: Vehicle,

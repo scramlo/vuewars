@@ -12,6 +12,7 @@ import { useModalStore } from '@/stores/modal';
 import useGetItem from '@/composables/useGetItem';
 import SinglePerson from '@/components/SinglePerson.vue';
 import SingleVehicle from '@/components/SingleVehicle.vue';
+import SingleFilm from '@/components/SingleFilm.vue';
 
 const store = useModalStore();
 const { toggleModal } = store;
@@ -42,6 +43,8 @@ const singleItemComponent = computed(() => {
         return () => h(SinglePerson as Component, { person: singleItem?.value });
     } else if (category === CategoryKey.Vehicle) {
         return () => h(SingleVehicle as Component, { vehicle: singleItem?.value });
+    } else if (category === CategoryKey.Film) {
+        return () => h(SingleFilm as Component, { film: singleItem?.value });
     }
     return () => h('div', 'No component found');
 });

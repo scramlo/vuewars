@@ -8,10 +8,11 @@ export default function useScrapeDuckDuckGo(item: () => Category|undefined) {
     const scrapeDuckDuckGo = () => {
         const term = toValue(item)?.name;
         if (term) {
-            fetch(`https://api.duckduckgo.com/?q=${term}&format=json&iax=images&ia=images`)
+            fetch(`https://api.duckduckgo.com/?q=star+wars+${term}&format=json&iax=images&ia=images`)
             .then((response) => response.json())
             .then((data: DDGData) => {
                 ddgData.value = data;
+                console.log(data);
                 if (data.Image) {
                     imageUrl.value = `https://duckduckgo.com/` + data.Image;
                 } else if (data.RelatedTopics[0]?.Icon?.URL) {

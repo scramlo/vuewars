@@ -144,3 +144,20 @@ export function getVehicle(id: string) {
     const result = computed(() => query.result.value?.vehicle)
     return result;
 }
+
+export function getFilm(id: string) {
+    const query = provideApolloClient(apolloClient)(() => useQuery(gql`
+    query getFilm($id: ID!) {
+        film(id: $id) {
+            name: title
+            title
+            releaseDate
+            director
+        }
+    }
+  `, {
+        id
+    }))
+    const result = computed(() => query.result.value?.film)
+    return result;
+}
