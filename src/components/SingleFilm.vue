@@ -18,9 +18,10 @@ const { ddgData, imageUrl } = useScrapeDuckDuckGo(() => props.film);
                 <li class="capitalize"><span class="font-bold">Title:</span> {{ film?.title ?? '' }}</li>
                 <li class="capitalize"><span class="font-bold">Release Date:</span> {{ film?.releaseDate ?? '' }}</li>
                 <li class="capitalize"><span class="font-bold">Director:</span> {{ film?.director ?? '' }}</li>
+                <li class="capitalize"><span class="font-bold">Opening Crawl:</span> {{ film?.openingCrawl ?? '' }}</li>
             </ul>
             <UITransition transition-duration="1s">
-                <img v-if="imageUrl" class="rounded h-[325px] w-[325px] object-contain" height="325" width="325" :src="imageUrl" :alt="ddgData?.Heading">
+                <img v-if="imageUrl" class="rounded h-full w-full object-contain" height="325" width="325" :src="imageUrl" :alt="ddgData?.Heading">
             </UITransition>
         </div>
         <p v-if="ddgData?.Abstract">

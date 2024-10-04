@@ -2,10 +2,9 @@
 import { useRoute } from 'vue-router'
 import useGetItems from "@/composables/useGetItems";
 import Page from '@/components/Page.vue';
-import useArraysByLetter from '@/composables/useArraysByLetter';
-import { ref, watchEffect, type Ref, type ComputedRef, computed, h, type Component } from 'vue';
+import { ref, type ComputedRef, computed, h, type Component } from 'vue';
 import UITransition from '@/components/ui/UITransition.vue';
-import type { CategoryArray, Category } from "@/types";
+import type { Category } from "@/types";
 import { CategoryFriendly, CategoryKey } from "@/constants";
 import UIModal from '@/components/ui/UIModal.vue';
 import { useModalStore } from '@/stores/modal';
@@ -13,6 +12,7 @@ import useGetItem from '@/composables/useGetItem';
 import SinglePerson from '@/components/SinglePerson.vue';
 import SingleVehicle from '@/components/SingleVehicle.vue';
 import SingleFilm from '@/components/SingleFilm.vue';
+import SinglePlanet from '@/components/SinglePlanet.vue';
 
 const store = useModalStore();
 const { toggleModal } = store;
@@ -43,6 +43,8 @@ const singleItemComponent = computed(() => {
         return () => h(SinglePerson as Component, { person: singleItem?.value });
     } else if (category === CategoryKey.Vehicle) {
         return () => h(SingleVehicle as Component, { vehicle: singleItem?.value });
+    } else if (category === CategoryKey.Planet) {
+        return () => h(SinglePlanet as Component, { planet: singleItem?.value });
     } else if (category === CategoryKey.Film) {
         return () => h(SingleFilm as Component, { film: singleItem?.value });
     }

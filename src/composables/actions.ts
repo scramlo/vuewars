@@ -112,6 +112,7 @@ export function getPlanet(id: string) {
     query getPlanet($id: ID!) {
         planet(id: $id) {
             name
+            population
         }
     }
   `, {
@@ -153,6 +154,7 @@ export function getFilm(id: string) {
             title
             releaseDate
             director
+            openingCrawl
         }
     }
   `, {

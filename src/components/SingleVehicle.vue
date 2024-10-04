@@ -28,7 +28,7 @@ const { ddgData, imageUrl } = useScrapeDuckDuckGo(() => props.vehicle);
                 <li class="capitalize"><span class="font-bold">Consumables:</span> {{ vehicle?.consumables ?? '' }}</li>
             </ul>
             <UITransition>
-                <img v-if="imageUrl" class="rounded h-[325px] w-[325px] object-scale-down" height="325" width="325" :src="imageUrl" :alt="ddgData?.Heading">
+                <img v-if="imageUrl" class="rounded h-full w-full object-scale-down" height="325" width="325" :src="imageUrl" :alt="ddgData?.Heading">
             </UITransition>
         </div>
         <p v-if="ddgData?.Abstract">
