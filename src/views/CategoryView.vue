@@ -9,10 +9,11 @@ import { CategoryFriendly, CategoryKey } from "@/constants";
 import UIModal from '@/components/ui/UIModal.vue';
 import { useModalStore } from '@/stores/modal';
 import useGetItem from '@/composables/useGetItem';
-import SinglePerson from '@/components/SinglePerson.vue';
-import SingleVehicle from '@/components/SingleVehicle.vue';
-import SingleFilm from '@/components/SingleFilm.vue';
-import SinglePlanet from '@/components/SinglePlanet.vue';
+import StatsPerson from '@/components/StatsPerson.vue';
+import StatsVehicle from '@/components/StatsVehicle.vue';
+import StatsFilm from '@/components/StatsFilm.vue';
+import StatsPlanet from '@/components/StatsPlanet.vue';
+import SingleItem from '@/components/SingleItem.vue';
 
 const store = useModalStore();
 const { toggleModal } = store;
@@ -40,13 +41,13 @@ function showItemDetails(category: Category) {
 
 const singleItemComponent = computed(() => {
     if (category === CategoryKey.Person) {
-        return () => h(SinglePerson as Component, { person: singleItem?.value });
+        return () => h(StatsPerson as Component, { person: singleItem?.value });
     } else if (category === CategoryKey.Vehicle) {
-        return () => h(SingleVehicle as Component, { vehicle: singleItem?.value });
+        return () => h(StatsVehicle as Component, { vehicle: singleItem?.value });
     } else if (category === CategoryKey.Planet) {
-        return () => h(SinglePlanet as Component, { planet: singleItem?.value });
+        return () => h(StatsPlanet as Component, { planet: singleItem?.value });
     } else if (category === CategoryKey.Film) {
-        return () => h(SingleFilm as Component, { film: singleItem?.value });
+        return () => h(StatsFilm as Component, { film: singleItem?.value });
     }
     return () => h('div', 'No component found');
 });
@@ -80,6 +81,8 @@ const singleItemComponent = computed(() => {
         <template #title>
             <h1 class="text-2xl font-extrabold">{{ singleItem?.name ?? 'Loading' }}</h1>
         </template>
-        <component :is="singleItemComponent"/>
+        <SingleItem :category="singleItem">
+            <component :is="singleItemComponent" />
+        </SingleItem>
     </UIModal>
 </template>
