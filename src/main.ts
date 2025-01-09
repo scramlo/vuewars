@@ -6,7 +6,7 @@ import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client/core
 import { DefaultApolloClient } from '@vue/apollo-composable';
 
 const httpLink = createHttpLink({
-    uri: 'https://swapi-graphql.netlify.app/.netlify/functions/index',
+    uri: 'https://swapigql.netlify.app/',
 })
 
 // Cache implementation
